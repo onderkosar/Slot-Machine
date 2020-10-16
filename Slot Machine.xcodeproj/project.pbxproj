@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		95A87820253A2C6800CA1E76 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A8781F253A2C6800CA1E76 /* LogoView.swift */; };
+		95A87824253A2CD700CA1E76 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A87823253A2CD700CA1E76 /* Modifiers.swift */; };
+		95A87827253A2F9A00CA1E76 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A87826253A2F9A00CA1E76 /* Extensions.swift */; };
+		95A8782A253A326300CA1E76 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A87829253A326300CA1E76 /* Enums.swift */; };
 		95EE1EB42538E55900BA7AF0 /* Slot_MachineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE1EB32538E55900BA7AF0 /* Slot_MachineApp.swift */; };
 		95EE1EB62538E55900BA7AF0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE1EB52538E55900BA7AF0 /* ContentView.swift */; };
 		95EE1EB82538E55D00BA7AF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95EE1EB72538E55D00BA7AF0 /* Assets.xcassets */; };
@@ -22,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		95A8781F253A2C6800CA1E76 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
+		95A87823253A2CD700CA1E76 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		95A87826253A2F9A00CA1E76 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		95A87829253A326300CA1E76 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		95EE1EB02538E55900BA7AF0 /* Slot Machine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slot Machine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		95EE1EB32538E55900BA7AF0 /* Slot_MachineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot_MachineApp.swift; sourceTree = "<group>"; };
 		95EE1EB52538E55900BA7AF0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -49,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95A8781E253A2C5200CA1E76 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				95A8781F253A2C6800CA1E76 /* LogoView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		95EE1EA72538E55900BA7AF0 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				95EE1ED62538E75C00BA7AF0 /* Helpers */,
+				95A8781E253A2C5200CA1E76 /* Views */,
 				95EE1ED52538E74300BA7AF0 /* App */,
 				95EE1ED42538E72900BA7AF0 /* Sounds */,
 				95EE1EB72538E55D00BA7AF0 /* Assets.xcassets */,
@@ -113,6 +130,9 @@
 		95EE1ED62538E75C00BA7AF0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				95A87823253A2CD700CA1E76 /* Modifiers.swift */,
+				95A87826253A2F9A00CA1E76 /* Extensions.swift */,
+				95A87829253A326300CA1E76 /* Enums.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -194,7 +214,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A87827253A2F9A00CA1E76 /* Extensions.swift in Sources */,
+				95A87824253A2CD700CA1E76 /* Modifiers.swift in Sources */,
 				95EE1EB62538E55900BA7AF0 /* ContentView.swift in Sources */,
+				95A87820253A2C6800CA1E76 /* LogoView.swift in Sources */,
+				95A8782A253A326300CA1E76 /* Enums.swift in Sources */,
 				95EE1EB42538E55900BA7AF0 /* Slot_MachineApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

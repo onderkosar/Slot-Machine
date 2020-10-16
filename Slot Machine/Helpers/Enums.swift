@@ -10,6 +10,7 @@ import SwiftUI
 enum SMSymbols {
     static let reset        = Image(systemName: "arrow.2.circlepath.circle")
     static let info         = Image(systemName: "info.circle")
+    static let xmark        = Image(systemName: "xmark.circle")
 }
 
 enum SMColors {

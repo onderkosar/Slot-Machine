@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     // MARK: - PROPERTIES
+    @State private var showingInfoView: Bool = false
     
     // MARK: - BODY
     var body: some View {
@@ -51,7 +52,7 @@ struct ContentView: View {
                 
                 // MARK: - SLOT MACHINE
                 VStack(alignment: .center, spacing: 0) {
-                    // MARK: - REEL #1
+                    // REEL #1
                     ZStack {
                         ReelView()
                         SMImages.bell
@@ -60,7 +61,7 @@ struct ContentView: View {
                     } // Top Slot
                     
                     HStack(alignment: .center, spacing: 0) {
-                        // MARK: - REEL #2
+                        // REEL #2
                         ZStack {
                             ReelView()
                             SMImages.seven
@@ -70,14 +71,14 @@ struct ContentView: View {
                         
                         Spacer()
                         
-                        // MARK: - REEL #3
+                        // REEL #3
                         ZStack {
                             ReelView()
                             SMImages.cherry
                                 .resizable()
                                 .modifier(ImageModifier())
                         }
-                    } // Bottom Two Slots
+                    } // Two Slots
                     .frame(maxWidth: 500)
                     
                     // MARK: - SPIN BUTTON
@@ -97,7 +98,7 @@ struct ContentView: View {
                 Spacer()
                 
                 HStack {
-                    // MARK: - BET 20
+                    // BET 20
                     HStack(alignment: .center, spacing: 10) {
                         Button(action: {
                             print("Bet 20 coins")
@@ -115,7 +116,7 @@ struct ContentView: View {
                             .modifier(CasinoChipsModifier())
                     }
                     
-                    // MARK: - BET 10
+                    // BET 10
                     HStack(alignment: .center, spacing: 10) {
                         SMImages.casinoChips
                             .resizable()
@@ -134,6 +135,7 @@ struct ContentView: View {
                     }
                 }
             }
+            
             // MARK: - BUTTONS
             .overlay(
                 // RESET
@@ -148,7 +150,7 @@ struct ContentView: View {
             .overlay(
                 // INFO
                 Button(action: {
-                    print("Info View")
+                    self.showingInfoView = true
                 }) {
                     SMSymbols.info
                 }
@@ -159,10 +161,11 @@ struct ContentView: View {
             .padding()
             .frame(maxWidth: 720)
             
-            // MARK: POPUP
-            
-            
+            // MARK: - POPUP
         } // ZStack
+        .sheet(isPresented: $showingInfoView) {
+            InfoView()
+        }
     }
 }
 

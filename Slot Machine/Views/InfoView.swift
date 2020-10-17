@@ -32,6 +32,7 @@ struct InfoView: View {
         .padding(.top, 40)
         .overlay(
             Button(action: {
+                audioPlayer?.stop()
                 self.presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: SFSymbolName.xmark)
@@ -42,6 +43,9 @@ struct InfoView: View {
             .accentColor(Color.secondary)
             , alignment: .topTrailing
         )
+        .onAppear(perform: {
+            playSound(sound: SMSoundName.background)
+        })
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     // MARK: - PROPERTIES
     let symbols = [SMImageName.bell, SMImageName.cherry, SMImageName.coin, SMImageName.grape, SMImageName.seven, SMImageName.strawberry]
+    let haptics = UINotificationFeedbackGenerator()
     
     @State private var highscore: Int = UserDefaults.standard.integer(forKey: "HighScore")
     
@@ -28,6 +29,8 @@ struct ContentView: View {
         reels = reels.map({ _ in
             Int.random(in: 0...symbols.count - 1)
         })
+        playSound(sound: SMSoundName.spin)
+        haptics.notificationOccurred(.success)
     }
     
     func checkWinning() {
@@ -36,7 +39,12 @@ struct ContentView: View {
             playerWins()
             
             // NEW HIGHSCORE
-            if coins > highscore { newHighscore() }
+            if coins > highscore {
+                newHighscore()
+                
+            } else {
+                playSound(sound: SMSoundName.win)
+            }
             
         } else {
             // PLAYER LOSES
@@ -49,6 +57,7 @@ struct ContentView: View {
         if coins <= 0 {
             // SHOW MODAL WINDOW
             showingModal = true
+            playSound(sound: SMSoundName.gameOver)
         }
     }
     
@@ -60,6 +69,7 @@ struct ContentView: View {
     func newHighscore() {
         highscore = coins
         UserDefaults.standard.set(highscore, forKey: "HighScore")
+        playSound(sound: SMSoundName.highscore)
     }
     
     func playerLoses() {
@@ -69,11 +79,15 @@ struct ContentView: View {
     func activateBet20() {
         betAmount = 20
         isActiveBet10 = false
+        playSound(sound: SMSoundName.casinoChips)
+        haptics.notificationOccurred(.success)
     }
     
     func activateBet10() {
         betAmount = 10
         isActiveBet10 = true
+        playSound(sound: SMSoundName.casinoChips)
+        haptics.notificationOccurred(.success)
     }
     
     func resetGame() {
@@ -81,6 +95,7 @@ struct ContentView: View {
         highscore = 0
         coins = 100
         activateBet10()
+        playSound(sound: SMSoundName.chimeup)
     }
     
     // MARK: - BODY
@@ -135,6 +150,7 @@ struct ContentView: View {
                             .animation(.easeOut(duration: Double.random(in: 0.5...0.7)))
                             .onAppear(perform: {
                                 self.animatingSymbol.toggle()
+                                playSound(sound: SMSoundName.riseup)
                             })
                     } // ZStack Reel #1
                     

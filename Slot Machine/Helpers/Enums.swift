@@ -34,3 +34,14 @@ enum SMImageName {
     static let spin         = "gfx-spin"
     static let strawberry   = "gfx-strawberry"
 }
+
+enum SMSoundName {
+    static let background   = "background-music"
+    static let casinoChips  = "casino-chips"
+    static let chimeup      = "chimeup"
+    static let gameOver     = "game-over"
+    static let highscore    = "high-score"
+    static let riseup       = "riseup"
+    static let spin         = "spin"
+    static let win          = "win"
+}

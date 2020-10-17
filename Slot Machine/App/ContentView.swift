@@ -12,15 +12,17 @@ struct ContentView: View {
     let symbols = [SMImageName.bell, SMImageName.cherry, SMImageName.coin, SMImageName.grape, SMImageName.seven, SMImageName.strawberry]
     
     @State private var highscore: Int = UserDefaults.standard.integer(forKey: "HighScore")
-    @State private var coins: Int = 100
-    @State private var betAmount: Int = 10
     
-    @State private var reels: Array = [0, 1, 2]
-    @State private var showingInfoView: Bool = false
+    @State private var coins: Int       = 100
+    @State private var betAmount: Int   = 10
+    @State private var reels: Array     = [0, 1, 2]
     
-    @State private var isActiveBet10: Bool = true
+    @State private var showingInfoView: Bool    = false
+    @State private var isActiveBet10: Bool      = true
+    @State private var showingModal: Bool       = false
+    @State private var animatingSymbol: Bool    = false
+    @State private var animatingModal: Bool     = false
     
-    @State private var showingModal: Bool = false
     // MARK: - MAIN FUNCTIONS
     func spinReels() {
         reels = reels.map({ _ in
@@ -128,6 +130,12 @@ struct ContentView: View {
                         Image(symbols[reels[0]])
                             .resizable()
                             .modifier(ImageModifier())
+                            .opacity(animatingSymbol ? 1 : 0)
+                            .offset(y: animatingSymbol ? 0 : -50)
+                            .animation(.easeOut(duration: Double.random(in: 0.5...0.7)))
+                            .onAppear(perform: {
+                                self.animatingSymbol.toggle()
+                            })
                     } // ZStack Reel #1
                     
                     HStack(alignment: .center, spacing: 0) {
@@ -137,6 +145,12 @@ struct ContentView: View {
                             Image(symbols[reels[1]])
                                 .resizable()
                                 .modifier(ImageModifier())
+                                .opacity(animatingSymbol ? 1 : 0)
+                                .offset(y: animatingSymbol ? 0 : -50)
+                                .animation(.easeOut(duration: Double.random(in: 0.8...0.9)))
+                                .onAppear(perform: {
+                                    self.animatingSymbol.toggle()
+                                })
                         }
                         
                         Spacer()
@@ -147,14 +161,35 @@ struct ContentView: View {
                             Image(symbols[reels[2]])
                                 .resizable()
                                 .modifier(ImageModifier())
+                                .opacity(animatingSymbol ? 1 : 0)
+                                .offset(y: animatingSymbol ? 0 : -50)
+                                .animation(.easeOut(duration: Double.random(in: 0.9...1.1)))
+                                .onAppear(perform: {
+                                    self.animatingSymbol.toggle()
+                                })
                         }
                     } // HStack Reel #2 & #3
                     .frame(maxWidth: 500)
                     
                     // MARK: - SPIN BUTTON
                     Button(action: {
+                        // 1. SET THE DEFAULT STATE: NO ANIMATION
+                        withAnimation {
+                            self.animatingSymbol = false
+                        }
+                        
+                        // 2. SET THE REELS WITH CHANGING THE SYMBOLS
                         self.spinReels()
+                        
+                        // 3. TRIGGER THE ANIMATION AFTER CHANGING THE SYMBOLS
+                        withAnimation {
+                            self.animatingSymbol = true
+                        }
+                        
+                        // 4. CHECK WINNING
                         self.checkWinning()
+                        
+                        // 5. GAME IS OVER
                         self.checkGameOver()
                     }) {
                         Image(SMImageName.spin)
@@ -184,14 +219,18 @@ struct ContentView: View {
                         
                         Image(SMImageName.casinoChips)
                             .resizable()
+                            .offset(x: isActiveBet10 ? 20 : 0)
                             .opacity(isActiveBet10 ? 0 : 1)
                             .modifier(CasinoChipsModifier())
                     }
+                    
+                    Spacer()
                     
                     // BET 10
                     HStack(alignment: .center, spacing: 10) {
                         Image(SMImageName.casinoChips)
                             .resizable()
+                            .offset(x: isActiveBet10 ? 0 : -20)
                             .opacity(isActiveBet10 ? 1 : 0)
                             .modifier(CasinoChipsModifier())
                         
@@ -266,7 +305,9 @@ struct ContentView: View {
                                 .layoutPriority(1)
                             
                             Button(action: {
-                                self.showingModal = false
+                                self.showingModal   = false
+                                self.animatingModal = false
+                                self.activateBet10()
                                 self.coins = 100
                             }) {
                                 Text("New Game".uppercased())
@@ -288,6 +329,12 @@ struct ContentView: View {
                     .background(Color.white)
                     .cornerRadius(20)
                     .shadow(color: SMColors.trBlack, radius: 6, x: 0, y: 8)
+                    .opacity($animatingModal.wrappedValue ? 1 : 0)
+                    .offset(y: $animatingModal.wrappedValue ? 0 : -100)
+                    .animation(Animation.spring(response: 0.6, dampingFraction: 1.0, blendDuration: 1.0))
+                    .onAppear(perform: {
+                        self.animatingModal = true
+                    })
                 }
             }
         } // ZStack

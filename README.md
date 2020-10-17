@@ -12,8 +12,8 @@
 - User Defaults
 - Forms in SwiftUI
 - Game Logic
-- Sound effects
-- Animations
+- Sound effects and animations
+- iMessage stickers
 - Mac Catalyst (coming soon)
 
 #### Requirement

@@ -34,7 +34,7 @@ struct InfoView: View {
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
-                SMSymbols.xmark
+                Image(systemName: SFSymbolName.xmark)
                     .font(.title)
             }
             .padding(.top, 30)

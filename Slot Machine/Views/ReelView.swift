@@ -12,7 +12,7 @@ struct ReelView: View {
     
     // MARK: - BODY
     var body: some View {
-        SMImages.reel
+        Image(SMImageName.reel)
             .resizable()
             .modifier(ImageModifier())
     }

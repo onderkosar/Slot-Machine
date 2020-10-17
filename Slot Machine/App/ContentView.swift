@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     // MARK: - PROPERTIES
+    let symbols = [SMImageName.bell, SMImageName.cherry, SMImageName.coin, SMImageName.grape, SMImageName.seven, SMImageName.strawberry]
     @State private var showingInfoView: Bool = false
     
     // MARK: - BODY
@@ -55,7 +56,7 @@ struct ContentView: View {
                     // REEL #1
                     ZStack {
                         ReelView()
-                        SMImages.bell
+                        Image(symbols[0])
                             .resizable()
                             .modifier(ImageModifier())
                     } // Top Slot
@@ -64,7 +65,7 @@ struct ContentView: View {
                         // REEL #2
                         ZStack {
                             ReelView()
-                            SMImages.seven
+                            Image(symbols[1])
                                 .resizable()
                                 .modifier(ImageModifier())
                         }
@@ -74,7 +75,7 @@ struct ContentView: View {
                         // REEL #3
                         ZStack {
                             ReelView()
-                            SMImages.cherry
+                            Image(symbols[4])
                                 .resizable()
                                 .modifier(ImageModifier())
                         }
@@ -85,7 +86,7 @@ struct ContentView: View {
                     Button(action: {
                         print("Spin the reels")
                     }) {
-                        SMImages.spin
+                        Image(SMImageName.spin)
                             .renderingMode(.original)
                             .resizable()
                             .modifier(ImageModifier())
@@ -110,7 +111,7 @@ struct ContentView: View {
                         }
                         .modifier(BetCapsuleModifier())
                         
-                        SMImages.casinoChips
+                        Image(SMImageName.casinoChips)
                             .resizable()
                             .opacity(0)
                             .modifier(CasinoChipsModifier())
@@ -118,7 +119,7 @@ struct ContentView: View {
                     
                     // BET 10
                     HStack(alignment: .center, spacing: 10) {
-                        SMImages.casinoChips
+                        Image(SMImageName.casinoChips)
                             .resizable()
                             .opacity(1)
                             .modifier(CasinoChipsModifier())
@@ -142,7 +143,7 @@ struct ContentView: View {
                 Button(action: {
                     print("Reset the game")
                 }) {
-                    SMSymbols.reset
+                    Image(systemName: SFSymbolName.reset)
                 }
                 .modifier(ButtonModifier()),
                 alignment: .topLeading
@@ -152,7 +153,7 @@ struct ContentView: View {
                 Button(action: {
                     self.showingInfoView = true
                 }) {
-                    SMSymbols.info
+                    Image(systemName: SFSymbolName.info)
                 }
                 .modifier(ButtonModifier()),
                 alignment: .topTrailing

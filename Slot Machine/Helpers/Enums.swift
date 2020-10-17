@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-enum SMSymbols {
-    static let reset        = Image(systemName: "arrow.2.circlepath.circle")
-    static let info         = Image(systemName: "info.circle")
-    static let xmark        = Image(systemName: "xmark.circle")
+enum SFSymbolName {
+    static let reset        = "arrow.2.circlepath.circle"
+    static let info         = "info.circle"
+    static let xmark        = "xmark.circle"
 }
 
 enum SMColors {
@@ -20,17 +20,17 @@ enum SMColors {
     static let yellow       = Color("ColorYellow")
 }
 
-enum SMImages {
-    static let background   = Image("gfx-background")
-    static let bell         = Image("gfx-bell")
-    static let casinoChips  = Image("gfx-casino-chips")
-    static let cherry       = Image("gfx-cherry")
-    static let coin         = Image("gfx-coin")
-    static let grape        = Image("gfx-grape")
-    static let reel         = Image("gfx-reel")
-    static let sevenReel    = Image("gfx-seven-reel")
-    static let seven        = Image("gfx-seven")
-    static let slotMachine  = Image("gfx-slot-machine")
-    static let spin         = Image("gfx-spin")
-    static let strawberry   = Image("gfx-strawberry")
+enum SMImageName {
+    static let background   = "gfx-background"
+    static let bell         = "gfx-bell"
+    static let casinoChips  = "gfx-casino-chips"
+    static let cherry       = "gfx-cherry"
+    static let coin         = "gfx-coin"
+    static let grape        = "gfx-grape"
+    static let reel         = "gfx-reel"
+    static let sevenReel    = "gfx-seven-reel"
+    static let seven        = "gfx-seven"
+    static let slotMachine  = "gfx-slot-machine"
+    static let spin         = "gfx-spin"
+    static let strawberry   = "gfx-strawberry"
 }

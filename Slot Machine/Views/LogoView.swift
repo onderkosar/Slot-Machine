@@ -12,7 +12,7 @@ struct LogoView: View {
     
     // MARK: - BODY
     var body: some View {
-        SMImages.slotMachine
+        Image(SMImageName.slotMachine)
             .resizable()
             .scaledToFit()
             .frame(minWidth: 256, idealWidth: 300, maxWidth: 320, minHeight: 112, idealHeight: 130, maxHeight: 140, alignment: .center)

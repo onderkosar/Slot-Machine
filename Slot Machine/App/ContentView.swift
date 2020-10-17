@@ -19,6 +19,8 @@ struct ContentView: View {
     @State private var showingInfoView: Bool = false
     
     @State private var isActiveBet10: Bool = true
+    
+    @State private var showingModal: Bool = false
     // MARK: - MAIN FUNCTIONS
     func spinReels() {
         reels = reels.map({ _ in
@@ -41,7 +43,12 @@ struct ContentView: View {
     }
     
     // GAME IS OVER
-    
+    func checkGameOver() {
+        if coins <= 0 {
+            // SHOW MODAL WINDOW
+            showingModal = true
+        }
+    }
     
     // MARK: - SUB FUNCTIONS
     func playerWins() {
@@ -140,6 +147,7 @@ struct ContentView: View {
                     Button(action: {
                         self.spinReels()
                         self.checkWinning()
+                        self.checkGameOver()
                     }) {
                         Image(SMImageName.spin)
                             .renderingMode(.original)
@@ -216,8 +224,64 @@ struct ContentView: View {
             
             .padding()
             .frame(maxWidth: 720)
+            .blur(radius: $showingModal.wrappedValue ? 5 : 0, opaque: false)
             
             // MARK: - POPUP
+            if $showingModal.wrappedValue {
+                ZStack {
+                    SMColors.trBlack.edgesIgnoringSafeArea(.all)
+                    
+                    // MODAL
+                    VStack(spacing: 0) {
+                        // TITLE
+                        Text("GAME OVER")
+                            .font(.system(.title, design: .rounded))
+                            .fontWeight(.heavy)
+                            .padding()
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .background(SMColors.pink)
+                            .foregroundColor(Color.white)
+                        Spacer()
+                        
+                        // MESSAGE
+                        VStack(alignment: .center, spacing: 16) {
+                            Image(SMImageName.sevenReel)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxHeight: 72)
+                            
+                            Text("Bad luck! You lost all of the coins. \nLet's play again!")
+                                .font(.system(.body, design: .rounded))
+                                .lineLimit(2)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color.gray)
+                                .layoutPriority(1)
+                            
+                            Button(action: {
+                                self.showingModal = false
+                                self.coins = 100
+                            }) {
+                                Text("New Game".uppercased())
+                                    .font(.system(.body, design: .rounded))
+                                    .fontWeight(.semibold)
+                                    .accentColor(SMColors.pink)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 8)
+                                    .frame(minWidth: 128)
+                                    .background(
+                                        Capsule()
+                                            .strokeBorder(lineWidth: 1.75)
+                                            .foregroundColor(SMColors.pink)
+                                    )
+                            }
+                        }
+                        Spacer()
+                    }.frame(minWidth: 280, idealWidth: 280, maxWidth: 320, minHeight: 260, idealHeight: 280, maxHeight: 320, alignment: .center)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .shadow(color: SMColors.trBlack, radius: 6, x: 0, y: 8)
+                }
+            }
         } // ZStack
         .sheet(isPresented: $showingInfoView) {
             InfoView()
